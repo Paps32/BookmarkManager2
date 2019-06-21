@@ -17,6 +17,12 @@ So that I can keep URL's I like,
 I’d like to add bookmarks to my bookmark manager.
 ```
 
+```
+As a person
+So I can remove my bookmark from Bookmark Manager
+I want to delete a bookmark
+```
+
 
 | Noun | Verb |
 |-----|-----|

@@ -27,7 +27,7 @@ end
 end
 
   def self.create(url:, title:)
-    
+
     if ENV['ENVIRONMENT'] == 'test'
       conn = PG.connect(dbname: 'bookmark_manager_test')
     else
@@ -36,4 +36,14 @@ end
      result = conn.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}', '#{title}') RETURNING id, url, title;")
      Bookmark.new(id: result [0]['id'], url: result [0]['url'], title: result [0]['title'])
    end
+
+   def self.delete(id:)
+    if ENV['ENVIRONMENT'] == 'test'
+      connection = PG.connect(dbname: 'bookmark_manager_test')
+    else
+      connection = PG.connect(dbname: 'bookmark_manager')
+    end
+    connection.exec("DELETE FROM bookmarks WHERE id = #{id}")
+  end
+  
 end

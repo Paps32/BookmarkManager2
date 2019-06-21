@@ -30,3 +30,16 @@ feature 'add bookmarks' do
     expect(page).to have_link('Facebook', href: 'http://www.facebook.com')
   end
 end
+
+  feature 'deleting bookmarks' do
+    scenario 'user to be able to delete bookmark' do
+    Bookmark.create(url: "http://www.makers.tech", title: "Makers")
+    visit('/bookmarks')
+    expect(page).to have_link('Makers', href: 'http://www.makers.tech')
+
+    click_button 'Delete'
+
+    expect(current_path).to eq '/bookmarks'
+    expect(page).not_to have_link('Makers', href: 'http://www.makers.tech')
+  end
+end

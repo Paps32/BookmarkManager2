@@ -8,7 +8,7 @@ end
 
 
 feature 'view bookmarks' do
-  scenario 'view a list of bookmarked URLs' do
+  scenario 'view a list of bookmarked urls' do
     Bookmark.create(url: "http://www.destroyallsoftware.com", title: "Destroy All")
     Bookmark.create(url: "http://www.google.com", title: "Google")
     Bookmark.create(url: "http://www.makers.tech", title: "Makers")
@@ -27,6 +27,6 @@ feature 'add bookmarks' do
     fill_in('url', :with => 'http://www.facebook.com')
     fill_in('title', :with => 'Facebook')
     click_button('add')
-    expect(page).to have_content('Facebook', href: 'http://www.facebook.com')
+    expect(page).to have_link('Facebook', href: 'http://www.facebook.com')
   end
 end

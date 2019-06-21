@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'bookmark'
+require 'database_helpers'
 
 describe '.all' do
   it 'returns list of bookmarks' do
@@ -21,10 +22,13 @@ describe '.all' do
 
   describe '.create' do
     it 'creates a new bookmark' do
-      bookmark = Bookmark.create(url: 'http://www.facebook.com', title: 'Facebook').first
-      
-      expect(bookmark['url']).to eq('http://www.facebook.com')
-      expect(bookmark['title']).to eq('Facebook')
+      bookmark = Bookmark.create(url: 'http://www.facebook.com', title: 'Facebook')
+      persisted_data = persisted_data(id: bookmark.id)
+
+      expect(bookmark).to be_a Bookmark
+      expect(bookmark.id).to eq persisted_data['id']
+      expect(bookmark.title).to eq 'Facebook'
+      expect(bookmark.url).to eq 'http://www.facebook.com'
     end
-  end  
+  end
 end
